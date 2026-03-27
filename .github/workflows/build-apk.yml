@@ -30,26 +30,36 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Expo Prebuild (generate android folder)
+      - name: Expo Prebuild
         run: npx expo prebuild --platform android --no-install
 
-      - name: Add cleartext traffic to AndroidManifest
+      - name: Add cleartext traffic
         run: |
           sed -i 's/<application/<application android:usesCleartextTraffic="true"/' \
             android/app/src/main/AndroidManifest.xml
 
       - name: Accept Android licenses
-        run: yes | sdkmanager --licenses
+        run: yes | sdkmanager --licenses || true
 
-      - name: Build Debug APK
+      - name: Bundle JS into APK assets
+        run: |
+          mkdir -p android/app/src/main/assets
+          npx react-native bundle \
+            --platform android \
+            --dev false \
+            --entry-file index.js \
+            --bundle-output android/app/src/main/assets/index.android.bundle \
+            --assets-dest android/app/src/main/res
+
+      - name: Build Release APK
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+          ./gradlew assembleRelease --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: IFS-Mobile-App
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
           retention-days: 30
