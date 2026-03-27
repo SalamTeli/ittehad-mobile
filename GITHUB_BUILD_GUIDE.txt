@@ -1,0 +1,47 @@
+=====================================================
+  ITTEHAD FINANCIAL - GitHub Actions APK Build Guide
+  Free APK build - No Android Studio needed!
+=====================================================
+
+STEPS:
+======
+
+STEP 1 - GitHub Account banao (already hai toh skip karo)
+  - github.com pe jaao
+  - "Sign up" karo (free)
+
+STEP 2 - New Repository banao
+  - github.com/new pe jaao
+  - Repository name: ittehad-mobile
+  - Private select karo (code chhupana ho toh)
+  - "Create repository" click karo
+
+STEP 3 - Code upload karo (CMD mein)
+  cd E:\IFS-Mobile\IFS_App
+  git init
+  git add .
+  git commit -m "Initial commit"
+  git branch -M main
+  git remote add origin https://github.com/AAPKA_USERNAME/ittehad-mobile.git
+  git push -u origin main
+
+STEP 4 - Build automatically start hoga!
+  - github.com/AAPKA_USERNAME/ittehad-mobile pe jaao
+  - "Actions" tab click karo
+  - "Build Android APK" workflow dikhega
+  - 5-10 minute wait karo
+
+STEP 5 - APK download karo
+  - Build complete hone ke baad "Artifacts" section mein
+  - "IFS-Mobile-App" pe click karo
+  - ZIP download hoga - usmein APK hai!
+
+STEP 6 - Phone pe install karo
+  - APK WhatsApp pe send karo khud ko
+  - Phone mein install karo
+  - Settings - Unknown Sources - Allow
+
+=====================================================
+  TOTALLY FREE! No Android Studio! No NDK! No Gradle!
+  GitHub ke servers pe sab kuch hota hai.
+=====================================================
